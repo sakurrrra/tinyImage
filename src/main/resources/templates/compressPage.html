@@ -9,6 +9,7 @@
 <style>
     html,body{
         height: 100%;
+        overflow-x: hidden;
     }
     body{
         background: linear-gradient(to bottom, #c6dde4, #fefeff);
@@ -17,10 +18,14 @@
         cursor: pointer;
     }
     .nolife-upload-wrapper{
+        position: relative;
+        min-height: -webkit-fill-available;
         display: flex;
         flex-direction: column;
         align-items: center;
-        padding-bottom: 2.7rem;
+        z-index: 3;
+        padding-bottom: 100px;
+        /*padding-bottom: 2.7rem;*/
     }
     .nolife-uoload-drag{
         margin: 30px 0 20px 0;
@@ -46,6 +51,7 @@
         flex: 1;
         justify-content: space-between;
         line-height: 28px;
+        max-width: 24%;
     }
     .nolife-progress-card-center{
         flex: 2;
@@ -55,6 +61,8 @@
     .nolife-progress-card-right span,.nolife-progress-card-left span{
         font-weight: bold;
         color: #363a43;
+        text-overflow: ellipsis;
+        overflow: hidden;
     }
     .nolife-progress-card-right label,.nolife-progress-card-left label{
         color: #7eb631;
@@ -66,12 +74,12 @@
         left: 0;
         right: 0;
         bottom: 0;
-        height: 2.7rem;
+        height: 1.7rem;
         background-repeat: no-repeat;
         background-image: url('../tiny/images/compress/grass-confetti.png');
         background-size: contain;
     }
-    nolife-card-cloud-left {
+    .nolife-card-cloud-left {
         position: absolute;
         z-index: 1;
         top: -2.4rem;
@@ -84,7 +92,7 @@
         background-repeat: no-repeat;
         background-image: url('../tiny/images/compress/cloud-left.png');
     }
-    nolife-card-cloud-right {
+    .nolife-card-cloud-right {
         position: absolute;
         z-index: 2;
         top: -6.4rem;
@@ -99,8 +107,10 @@
     }
 </style>
 <body>
-    <div class="nolife-card-gress"></div>
+    <div class="nolife-card-cloud-left"></div>
+    <div class="nolife-card-cloud-right"></div>
     <div class="nolife-upload-wrapper">
+        <div class="nolife-card-gress"></div>
         <div class="layui-upload-drag nolife-uoload-drag" id="test10">
             <i class="iconfont icon-ziyuan" style="font-size: 48px;"></i>
             <p>点击上传，或将图片拖拽到此处</p>
@@ -122,8 +132,6 @@
                 </div>
             </div>-->
         </div>
-        <div class="nolife-card-gress"></div>
-        <span style="color: #FF5722"></span>
     </div>
 </body>
 <script src="../tiny/layui/layui.js"></script>
