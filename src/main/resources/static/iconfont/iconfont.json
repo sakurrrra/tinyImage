@@ -1,0 +1,30 @@
+{
+  "id": "1691311",
+  "name": "tinypng",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "515314",
+      "name": "上传_upload94",
+      "font_class": "shangchuanupload94",
+      "unicode": "e6b3",
+      "unicode_decimal": 59059
+    },
+    {
+      "icon_id": "634522",
+      "name": "上传_upload95",
+      "font_class": "shangchuanupload95",
+      "unicode": "e6cd",
+      "unicode_decimal": 59085
+    },
+    {
+      "icon_id": "9097091",
+      "name": "上传",
+      "font_class": "ziyuan",
+      "unicode": "e63d",
+      "unicode_decimal": 58941
+    }
+  ]
+}

@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:ths="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Tiny</title>
+    <link rel="stylesheet" href="../tiny/layui/css/layui.css">
+    <link rel="stylesheet" href="../tiny/iconfont/iconfont.css">
+</head>
+<style>
+    html,body{
+        height: 100%;
+    }
+    body{
+        background: linear-gradient(to bottom, #c6dde4, #fefeff);
+    }
+    a{
+        cursor: pointer;
+    }
+    .nolife-upload-wrapper{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding-bottom: 2.7rem;
+    }
+    .nolife-uoload-drag{
+        margin: 30px 0 20px 0;
+        border: 2px dashed #616778;
+        border-radius: 20px;
+        background-color: transparent;
+    }
+    .nolife-progress-wrapper{
+        position: relative;
+        padding: 12px;
+        min-width: 960px;
+        background-color: white;
+    }
+    .nolife-progress-card{
+        background: #f0f0f0;
+        padding: 0 12px;
+        display: flex;
+        align-items: center;
+        margin: 4px 0;
+    }
+    .nolife-progress-card-right,.nolife-progress-card-left{
+        display: flex;
+        flex: 1;
+        justify-content: space-between;
+        line-height: 28px;
+    }
+    .nolife-progress-card-center{
+        flex: 2;
+        margin: 0 15px;
+        border: 2px solid #ffffff;
+    }
+    .nolife-progress-card-right span,.nolife-progress-card-left span{
+        font-weight: bold;
+        color: #363a43;
+    }
+    .nolife-progress-card-right label,.nolife-progress-card-left label{
+        color: #7eb631;
+    }
+
+    .nolife-card-gress{
+        position: absolute;
+        z-index: 9;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        height: 2.7rem;
+        background-repeat: no-repeat;
+        background-image: url('../tiny/images/compress/grass-confetti.png');
+        background-size: contain;
+    }
+    nolife-card-cloud-left {
+        position: absolute;
+        z-index: 1;
+        top: -2.4rem;
+        left: -10%;
+        width: 55.7rem;
+        height: 22.3rem;
+        -webkit-background-size: 55.7rem 22.3rem;
+        -moz-background-size: 55.7rem 22.3rem;
+        background-size: 55.7rem 22.3rem;
+        background-repeat: no-repeat;
+        background-image: url('../tiny/images/compress/cloud-left.png');
+    }
+    nolife-card-cloud-right {
+        position: absolute;
+        z-index: 2;
+        top: -6.4rem;
+        right: -10%;
+        width: 72.4rem;
+        height: 25.6rem;
+        -webkit-background-size: 72.4rem 25.6rem;
+        -moz-background-size: 72.4rem 25.6rem;
+        background-size: 72.4rem 25.6rem;
+        background-repeat: no-repeat;
+        background-image: url('../tiny/images/compress/cloud-right.png');
+    }
+</style>
+<body>
+    <div class="nolife-card-gress"></div>
+    <div class="nolife-upload-wrapper">
+        <div class="layui-upload-drag nolife-uoload-drag" id="test10">
+            <i class="iconfont icon-ziyuan" style="font-size: 48px;"></i>
+            <p>点击上传，或将图片拖拽到此处</p>
+        </div>
+
+        <div class="nolife-progress-wrapper layui-hide" id="nolife-progress">
+            <!--<div class="nolife-progress-card">
+                <div class="nolife-progress-card-left">
+                    <span>banner1.jpg</span>
+                    <label>100k</label>
+                </div>
+                <div class="layui-progress layui-progress-big nolife-progress-card-center" lay-showPercent="true" lay-filter="imageProgress">
+                    <div class="layui-progress-bar" lay-percent="0%"></div>
+                </div>
+                <div class="nolife-progress-card-right">
+                    <label>100k</label>
+                    <a href="http://localhost:9001/tiny/images/compress/grass-confetti.png" download >download</a>
+                    <span>-9%</span>
+                </div>
+            </div>-->
+        </div>
+        <div class="nolife-card-gress"></div>
+        <span style="color: #FF5722"></span>
+    </div>
+</body>
+<script src="../tiny/layui/layui.js"></script>
+<script>
+    layui.use(['upload','element'], function(){
+        var $ = layui.jquery,upload = layui.upload, element = layui.element;
+        var progressList = $('#nolife-progress');
+        //拖拽上传
+        upload.render({
+            elem: '#test10'
+            ,url: 'http://localhost:9001/tiny/image/compress' //改成您自己的上传接口
+            ,multiple: true
+            ,acceptMime: 'image/*'
+            ,choose: function (obj) {
+                progressList.removeClass("layui-hide");
+                //读取本地文件
+                obj.preview(function (index, file) {
+                    var item = $(['<div class="nolife-progress-card" id="progressItem'+index+'">\n' +
+                    '                <div class="nolife-progress-card-left">\n' +
+                    '                    <span>' + file.name + '</span>\n' +
+                    '                    <label>' + (file.size / 1014).toFixed(1) + 'kb</label>\n' +
+                    '                </div>\n' +
+                    '                <div class="layui-progress layui-progress-big nolife-progress-card-center" lay-showPercent="true" lay-filter="imageProgress'+index+'">\n' +
+                    '                    <div class="layui-progress-bar" lay-percent="0%"></div>\n' +
+                    '                </div>\n' +
+                    '                <div class="nolife-progress-card-right">\n' +
+                    '                    <label></label>\n' +
+                    '                    <a href="" download="' + file.name + '" >download</a>\n' +
+                    '                    <span></span>\n' +
+                    '                </div>\n' +
+                    '            </div>'].join(''));
+
+                    progressList.prepend(item);
+                });
+            }
+            ,done: function(res,index){
+                const { data, code } = res;
+                console.log(code)
+                if(code === 200){
+                    const { path, outSize, inSize } = data[0]||{};
+                    const outS = (outSize / 1014).toFixed(1);
+                    const inS = (inSize / 1014).toFixed(1);
+                    const rate = ((outS-inS)/inS*100).toFixed(1);
+                    $("#progressItem"+index+" .nolife-progress-card-right>label").text( (outS || 0) + 'kb');
+                    $("#progressItem"+index+" .nolife-progress-card-right>span").text(( rate > 0 ? "+" + rate : rate ) + '%');
+                    $("#progressItem"+index+" .nolife-progress-card-right>a").attr('href',path);
+                    element.progress('imageProgress'+index, '100%');
+                }else{
+                    console.log('faill',index)
+                    $("#progressItem"+index+" .nolife-progress-card-right").html('<span style="color: #FF5722">上传失败</span>');
+                    $("#progressItem"+index+" .layui-progress-bar").addClass('layui-bg-red');
+                    element.progress('imageProgress'+index, '100%');
+                }
+            }
+        });
+
+    });
+</script>
+</html>
