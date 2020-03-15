@@ -1,5 +1,10 @@
 package com.nolife.common;
 
+/**
+ *description 自定义异常
+ *@author xierl
+ *date 2020/3/15
+ */
 public class SysException extends Exception {
 
     private String message;

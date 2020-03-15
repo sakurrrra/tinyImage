@@ -11,6 +11,11 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.Map;
 
+/**
+ *description 图片压缩controller
+ *@author xierl
+ *date 2020/3/15
+ */
 @Controller
 public class TinyController {
 
@@ -30,6 +35,11 @@ public class TinyController {
         return Result.success(result);
     }
 
+    /**
+     * description 图片压缩上传页面
+     * @return String
+     *
+     */
     @RequestMapping("/compressPage")
     public String hello(){
         return "compressPage";

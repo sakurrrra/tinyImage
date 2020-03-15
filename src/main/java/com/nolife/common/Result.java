@@ -2,7 +2,11 @@ package com.nolife.common;
 
 import java.io.Serializable;
 
-
+/**
+ *description 返回结果类
+ *@author xierl
+ *date 2020/3/15
+ */
 public class Result implements Serializable {
 
     private Integer code;

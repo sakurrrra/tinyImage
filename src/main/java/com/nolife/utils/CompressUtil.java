@@ -3,7 +3,6 @@ package com.nolife.utils;
 import com.nolife.common.Constants;
 import org.apache.tomcat.util.http.fileupload.disk.DiskFileItemFactory;
 import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
@@ -18,6 +17,11 @@ import java.io.*;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
+/**
+ *description 图片上传压缩
+ *@author xierl
+ *date 2020/3/15
+ */
 public class CompressUtil {
 
     public static List<Map<String,Object>> compress(HttpServletRequest request) throws Exception {
@@ -61,8 +65,8 @@ public class CompressUtil {
 
                 // 获取保存路径
 //				String path = request.getSession().getServletContext().getRealPath("/pictureUpload");// request.getRealPath("/pictureUpload");
-                String path = "src/main/resources/static/images/"+datePath+"/";
-//                String path = "images/"+datePath+"/";
+//                String path = "src/main/resources/static/images/"+datePath+"/";
+                String path = "images/"+datePath+"/";
 
                 // 判断保存路径是否存在-不存在则新建
                 File saveFile = new File(path);
@@ -96,8 +100,8 @@ public class CompressUtil {
 
                 // 构建返回结果
                 Map<String,Object> map = new HashMap<>();
-//                map.put("path","http://121.196.198.21/"+path+newName);
-                map.put("path","http://localhost:9001/tiny/images/"+datePath+"/"+newName);
+                map.put("path",Constants.SERVER_HOST+"/"+path+newName);
+//                map.put("path","http://localhost:9001/tiny/images/"+datePath+"/"+newName);
                 map.put("inSize",uploadFile.getSize());
                 map.put("outSize",new File(path+newName).length());
                 compressList.add(map);
@@ -116,11 +120,10 @@ public class CompressUtil {
     }
 
     /**
-     *
+     *  将图片输入流压缩保存到传入的路径
      * @param is 原图片输入流
      * @param descFilePath 保存路径
-     * @return
-     * @throws IOException
+     * @Exception IOException io
      */
     public static void  compressPic(InputStream is, String descFilePath) throws IOException {
         BufferedImage image = ImageIO.read(is);
