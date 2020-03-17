@@ -1,4 +1,4 @@
-package com.nolife.image.tiny.service;
+package com.nolife.web.image.tiny.service;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;

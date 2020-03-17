@@ -1,4 +1,4 @@
-package com.nolife.image.tiny.service;
+package com.nolife.web.image.tiny.service;
 
 import com.nolife.utils.CompressUtil;
 import org.springframework.stereotype.Service;

@@ -1,7 +1,7 @@
-package com.nolife.image.tiny.controller;
+package com.nolife.web.image.tiny.controller;
 
 import com.nolife.common.Result;
-import com.nolife.image.tiny.service.TinyService;
+import com.nolife.web.image.tiny.service.TinyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;

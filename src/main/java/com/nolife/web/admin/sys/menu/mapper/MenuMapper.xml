@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nolife.web.admin.sys.menu.mapper.MenuMapper">
+  <resultMap id="BaseResultMap" type="com.nolife.web.admin.sys.menu.model.Menu">
+    <id column="MENU_ID" jdbcType="INTEGER" property="menuId" />
+    <result column="MENU_NAME" jdbcType="VARCHAR" property="menuName" />
+    <result column="PARENT_MENU_ID" jdbcType="INTEGER" property="parentMenuId" />
+    <result column="MENU_URL" jdbcType="VARCHAR" property="menuUrl" />
+    <result column="IMAGE_URL" jdbcType="VARCHAR" property="imageUrl" />
+    <result column="SORT_NO" jdbcType="INTEGER" property="sortNo" />
+    <result column="REMARK" jdbcType="VARCHAR" property="remark" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    MENU_ID, MENU_NAME, PARENT_MENU_ID, MENU_URL, IMAGE_URL, SORT_NO, REMARK
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from T_SYS_MENU
+    where MENU_ID = #{menuId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from T_SYS_MENU
+    where MENU_ID = #{menuId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyProperty="menuId" parameterType="com.nolife.web.admin.sys.menu.model.Menu" useGeneratedKeys="true">
+    insert into T_SYS_MENU (MENU_NAME, PARENT_MENU_ID, MENU_URL, 
+      IMAGE_URL, SORT_NO, REMARK
+      )
+    values (#{menuName,jdbcType=VARCHAR}, #{parentMenuId,jdbcType=INTEGER}, #{menuUrl,jdbcType=VARCHAR}, 
+      #{imageUrl,jdbcType=VARCHAR}, #{sortNo,jdbcType=INTEGER}, #{remark,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" keyProperty="menuId" parameterType="com.nolife.web.admin.sys.menu.model.Menu" useGeneratedKeys="true">
+    insert into T_SYS_MENU
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="menuName != null">
+        MENU_NAME,
+      </if>
+      <if test="parentMenuId != null">
+        PARENT_MENU_ID,
+      </if>
+      <if test="menuUrl != null">
+        MENU_URL,
+      </if>
+      <if test="imageUrl != null">
+        IMAGE_URL,
+      </if>
+      <if test="sortNo != null">
+        SORT_NO,
+      </if>
+      <if test="remark != null">
+        REMARK,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="menuName != null">
+        #{menuName,jdbcType=VARCHAR},
+      </if>
+      <if test="parentMenuId != null">
+        #{parentMenuId,jdbcType=INTEGER},
+      </if>
+      <if test="menuUrl != null">
+        #{menuUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="imageUrl != null">
+        #{imageUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="sortNo != null">
+        #{sortNo,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.nolife.web.admin.sys.menu.model.Menu">
+    update T_SYS_MENU
+    <set>
+      <if test="menuName != null">
+        MENU_NAME = #{menuName,jdbcType=VARCHAR},
+      </if>
+      <if test="parentMenuId != null">
+        PARENT_MENU_ID = #{parentMenuId,jdbcType=INTEGER},
+      </if>
+      <if test="menuUrl != null">
+        MENU_URL = #{menuUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="imageUrl != null">
+        IMAGE_URL = #{imageUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="sortNo != null">
+        SORT_NO = #{sortNo,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null">
+        REMARK = #{remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where MENU_ID = #{menuId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.nolife.web.admin.sys.menu.model.Menu">
+    update T_SYS_MENU
+    set MENU_NAME = #{menuName,jdbcType=VARCHAR},
+      PARENT_MENU_ID = #{parentMenuId,jdbcType=INTEGER},
+      MENU_URL = #{menuUrl,jdbcType=VARCHAR},
+      IMAGE_URL = #{imageUrl,jdbcType=VARCHAR},
+      SORT_NO = #{sortNo,jdbcType=INTEGER},
+      REMARK = #{remark,jdbcType=VARCHAR}
+    where MENU_ID = #{menuId,jdbcType=INTEGER}
+  </update>
+  <select id="getList" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from T_SYS_MENU
+  </select>
+</mapper>

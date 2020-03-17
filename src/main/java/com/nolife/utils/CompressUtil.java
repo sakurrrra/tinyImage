@@ -1,8 +1,6 @@
 package com.nolife.utils;
 
 import com.nolife.common.Constants;
-import org.apache.tomcat.util.http.fileupload.disk.DiskFileItemFactory;
-import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
@@ -26,14 +24,14 @@ public class CompressUtil {
 
     public static List<Map<String,Object>> compress(HttpServletRequest request) throws Exception {
 
-        // 1.创建DiskFileItemFactory对象，配置缓存用
-        DiskFileItemFactory diskFileItemFactory = new DiskFileItemFactory();
-
-        // 2. 创建 ServletFileUpload对象
-        ServletFileUpload servletFileUpload = new ServletFileUpload(diskFileItemFactory);
-
-        // 3. 设置文件名称编码
-        servletFileUpload.setHeaderEncoding("utf-8");
+//        // 1.创建DiskFileItemFactory对象，配置缓存用
+//        DiskFileItemFactory diskFileItemFactory = new DiskFileItemFactory();
+//
+//        // 2. 创建 ServletFileUpload对象
+//        ServletFileUpload servletFileUpload = new ServletFileUpload(diskFileItemFactory);
+//
+//        // 3. 设置文件名称编码
+//        servletFileUpload.setHeaderEncoding("utf-8");
 
         // 4. 开始解析文件
         MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
@@ -103,7 +101,7 @@ public class CompressUtil {
                 map.put("path",Constants.SERVER_HOST+"/"+path+newName);
 //                map.put("path","http://localhost:9001/tiny/images/"+datePath+"/"+newName);
                 map.put("inSize",uploadFile.getSize());
-                map.put("outSize",new File(path+newName).length());
+                map.put("outSize", newFile.length());
                 compressList.add(map);
             }
             return compressList;

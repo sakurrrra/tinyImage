@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>    
+<!DOCTYPE generatorConfiguration    
+  PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"    
+  "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">    
+<generatorConfiguration>    
+<!-- 数据库驱动-->    
+    <context id="DB2Tables"  targetRuntime="MyBatis3">    
+    	<!-- 配置生成pojo的序列化的插件，mybatis支持很多插件，这些插件都在 org.mybatis.generator.plugins包下  -->
+        <plugin type="org.mybatis.generator.plugins.SerializablePlugin" />
+
+        <!-- 配置生成pojo的toString()方法的插件，mybatis支持很多插件，这些插件都在 org.mybatis.generator.plugins包下 -->
+        <plugin type="org.mybatis.generator.plugins.ToStringPlugin" />
+        
+        <commentGenerator>    
+            <property name="suppressDate" value="true"/>    
+            <!-- 是否去除自动生成的注释 true：是 ： false:否 -->    
+            <property name="suppressAllComments" value="true"/>
+        </commentGenerator>    
+        <!--数据库链接URL，用户名、密码 -->
+<!--        oracle-->
+<!--        <jdbcConnection -->
+<!--        	driverClass="oracle.jdbc.driver.OracleDriver" -->
+<!--        	connectionURL="jdbc:oracle:thin:@120.76.97.56:15217:ICRMDB2" -->
+<!--        	userId="bbg_wealthmgt" -->
+<!--        	password="bbg_wealthmgt"-->
+<!--        >    -->
+<!--        </jdbcConnection>-->
+        <jdbcConnection
+                driverClass="com.mysql.cj.jdbc.Driver"
+                connectionURL="jdbc:mysql://rm-bp1pdnj981ox54vm5bo.mysql.rds.aliyuncs.com:3306/bbg_wealthmgt?setUnicode=true&amp;characterEncoding=utf8"
+                userId="pacteramysql"
+                password="211501wy@"
+        >
+        </jdbcConnection>
+        <javaTypeResolver>    
+            <property name="forceBigDecimals" value="true"/>    
+        </javaTypeResolver>    
+        <!-- 生成模型的包名和位置-->    
+        <javaModelGenerator targetPackage="com.pactera.app.portal.news.model" targetProject="src/main/java">
+            <property name="enableSubPackages" value="true"/>    
+            <property name="trimStrings" value="true"/>    
+        </javaModelGenerator>    
+        <!-- 生成映射文件的包名和位置-->    
+        <sqlMapGenerator targetPackage="com.pactera.app.portal.news.mapper" targetProject="src/main/java">
+            <property name="enableSubPackages" value="true"/>    
+        </sqlMapGenerator>    
+        <!-- 生成DAO的包名和位置-->    
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.pactera.app.portal.news.mapper" targetProject="src/main/java">
+            <property name="enableSubPackages" value="true"/>
+        </javaClientGenerator>    
+        <!-- 要生成的表 tableName是数据库中的表名或视图名 domainObjectName是实体类名-->    
+        <!-- <table tableName="book" domainObjectName="Book" enableCountByExample="false"
+         enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" 
+         selectByExampleQueryId="false"></table>   -->
+        <table schema="bbg_wealthmgt" tableName="T_PORTAL_NEWS" domainObjectName="News" enableCountByExample="false"
+               enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+               <property name="ignoreQualifiersAtRuntime" value="true" />
+                <!--使用自增长key-->
+                <generatedKey column="NEWS_ID" sqlStatement="JDBC"/>
+        </table>
+
+    </context>    
+</generatorConfiguration>    
